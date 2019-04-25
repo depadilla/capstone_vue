@@ -1,16 +1,20 @@
 <template>
+  <!-- prettier-ignore -->
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/welcome" v-if="!jwt">Welcome |</router-link>
+      <router-link to="/Home" v-if="jwt"> Home |</router-link>
+      <router-link to="/SignUp" v-if="!jwt"> Sign Up |</router-link>
+      <router-link to="/LogIn" v-if="!jwt"> Log In |</router-link>
+      <router-link to="/LogOut" v-if="jwt"> Log Out </router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -29,3 +33,17 @@
   color: #42b983;
 }
 </style>
+
+<script>
+export default {
+  data: function() {
+    return {
+      jwt: null
+    };
+  },
+  created: function() {
+    this.jwt = localStorage.jwt;
+    console.log("My jwt is", this.jwt);
+  }
+};
+</script>
