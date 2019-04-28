@@ -10,8 +10,17 @@
 </template>
 
 <style>
-img {
-  width: 250px;
+body {
+  margin: 0;
+  padding: 2em;
+}
+#map {
+  margin-left: auto;
+  margin-right: auto;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  height: 400px;
 }
 </style>
 
@@ -26,6 +35,9 @@ export default {
     };
   },
   created: function() {
+    axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/bar.json").then(response => {
+      this.location = response.data;
+    });
     axios.get("/api/locations").then(response => {
       this.locations = response.data;
     });
@@ -33,8 +45,25 @@ export default {
       this.jwt = localStorage.jwt;
       console.log("My jwt is", this.jwt);
     }
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoiZGVwYWRpbGxhIiwiYSI6ImNqdWQ5bnVwODAzMzc0ZG54Nmczc2dtbnkifQ.KBH1DI_79-4JNlAOhb3xZg";
+    var map = new mapboxgl.Map({
+      container: "map", // container id
+      style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
+      center: [-87.6348295, 41.8921364], // starting position [lng, lat]
+      zoom: 13, // starting zoom
+      interactive: false
+    });
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true
+      })
+    );
+    var marker = new mapboxgl.Marker().setLngLat([-87.6348295, 41.8921364]).addTo(map);
   },
-
   methods: {}
 };
 </script>
