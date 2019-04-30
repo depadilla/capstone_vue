@@ -58,6 +58,7 @@ export default {
         .post("/api/users", params)
         .then(response => {
           this.$router.push("/Home");
+          document.location.reload();
         })
         .catch(error => {
           this.errors = error.response.data.errors;

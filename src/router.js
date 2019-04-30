@@ -4,6 +4,7 @@ import Welcome from "./views/Welcome.vue";
 import SignUp from "./views/SignUp.vue";
 import LogIn from "./views/LogIn.vue";
 import Home from "./views/Home.vue";
+import Show from "./views/Show.vue";
 import LogOut from "./views/LogOut.vue";
 
 Vue.use(Router);
@@ -36,6 +37,11 @@ export default new Router({
       path: "/LogOut",
       name: "logout",
       component: LogOut
+    },
+    {
+      path: "/locations/:id",
+      name: "show",
+      component: Show
     },
     {
       path: "/Home",

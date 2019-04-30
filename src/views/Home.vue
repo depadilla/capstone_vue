@@ -5,6 +5,8 @@
       <h4>{{ location.name }}</h4>
       <p>Description: {{ location.description }}</p>
       <p>Capacity: {{ location.capacity }}</p>
+      <!-- <router-link v-bind:to="`/locations/${location.id}`">More Info</router-link> -->
+      <router-link v-bind:to="`/locations/${location.id}`">More Info</router-link>
     </div>
   </div>
 </template>
@@ -25,6 +27,7 @@ body {
 </style>
 
 <script>
+/* global mapboxgl */
 var axios = require("axios");
 
 export default {
@@ -35,15 +38,15 @@ export default {
     };
   },
   created: function() {
-    axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/bar.json").then(response => {
-      this.location = response.data;
-    });
+    // axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/bar.json").then(response => {
+    //   this.location = response.data;
+    //   document.location.reload();
+    // });
     axios.get("/api/locations").then(response => {
       this.locations = response.data;
     });
     {
       this.jwt = localStorage.jwt;
-      console.log("My jwt is", this.jwt);
     }
     mapboxgl.accessToken =
       "pk.eyJ1IjoiZGVwYWRpbGxhIiwiYSI6ImNqdWQ5bnVwODAzMzc0ZG54Nmczc2dtbnkifQ.KBH1DI_79-4JNlAOhb3xZg";

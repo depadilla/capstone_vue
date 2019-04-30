@@ -5,10 +5,11 @@
       <router-link to="/welcome" v-if="!jwt">Welcome |</router-link>
       <router-link to="/Home" v-if="jwt"> Home |</router-link>
       <router-link to="/SignUp" v-if="!jwt"> Sign Up |</router-link>
-      <router-link to="/LogIn" v-if="!jwt"> Log In |</router-link>
-      <router-link to="/LogOut" v-if="jwt"> Log Out </router-link>
+      <router-link to="/LogIn" v-if="!jwt"> Log In </router-link>
+      <router-link to="#" v-on:click.native="logOut()" v-if="jwt" > Log Out </router-link>
     </div>
     <router-view />
+
   </div>
 </template>
 
@@ -35,15 +36,27 @@
 </style>
 
 <script>
+import axios from "axios";
+
 export default {
   data: function() {
     return {
-      jwt: null
+      jwt: null,
+      location: " "
     };
   },
   created: function() {
     this.jwt = localStorage.jwt;
-    console.log("My jwt is", this.jwt);
+  },
+  methods: {
+    logOut: function() {
+      axios({
+        method: "patch",
+        url: "/api/users/logout"
+      }).then(response => {
+        this.$router.push("/logout");
+      });
+    }
   }
 };
 </script>
