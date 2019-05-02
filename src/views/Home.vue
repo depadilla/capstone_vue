@@ -1,13 +1,94 @@
 <template>
   <div class="home">
-    <h1>{{ welcome_message }}</h1>
-    <div v-for="location in locations.slice(0, 5)">
+    <div v-for="location in locations.slice(0, 5)" class="container">
       <h4>{{ location.name }}</h4>
       <p>Description: {{ location.description }}</p>
       <p>Capacity: {{ location.capacity }}</p>
-      <!-- <router-link v-bind:to="`/locations/${location.id}`">More Info</router-link> -->
       <router-link v-bind:to="`/locations/${location.id}`">More Info</router-link>
     </div>
+
+    <section class="section pb-0 mr-8 ml-8" data-parallax="assets/img/street.jpg" data-overlay="4">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-4">
+            <div
+              class="mnb-8 z-index-10 shadow-8"
+              data-provide="slider"
+              data-slides-to-show="1"
+              data-slides-to-scroll="1"
+              data-dots="true"
+            >
+              <div>
+                <div class="card border-0 p-7">
+                  <blockquote>
+                    I just got to Farmhouse and the drinks are amazing!
+                  </blockquote>
+                  <div class="d-flex align-items-center border-top-muted pt-4">
+                    <div class="avatar">
+                      <img
+                        class="img-fluid rounded-circle"
+                        src="assets/img/avatar/avatar2.jpg"
+                        alt="Image Description"
+                      />
+                    </div>
+                    <div class="ml-3">
+                      <h4 class="fs-18 mb-0">Jhon Doe</h4>
+                      <!-- <small class="o-7">Sales Manager at Twitter</small> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div></div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="row justify-content-center text-white">
+              <div class="col-sm-4 col-lg-4 mb-7 mb-sm-0">
+                <div class="media">
+                  <div class="mr-3">
+                    <i class="icon-user-search-1 fs-44 mt-3"></i>
+                  </div>
+                  <div class="media-body">
+                    <h2
+                      class="fs-40 mb-0"
+                      data-provide="countup"
+                      data-from="0"
+                      data-to="5"
+                      data-prefix=""
+                      data-suffix=""
+                    ></h2>
+                    <p class="h5 mb-0">Total Bars</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-lg-4 mb-7 mb-sm-0">
+                <div class="media">
+                  <div class="mr-3">
+                    <i class="icon-cloud-download fs-47 mt-3"></i>
+                  </div>
+                  <div class="media-body">
+                    <h2 class="fs-40 mb-0" data-provide="countup" data-from="40" data-to="72" data-decimals=""></h2>
+                    <p class="h5 mb-0">Weather</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-lg-4 mb-7 mb-sm-0">
+                <div class="media">
+                  <div class="mr-3">
+                    <i class="icon-user-heart-2 fs-44 mt-3"></i>
+                  </div>
+                  <div class="media-body">
+                    <h2 class="fs-40 mb-0" data-provide="countup" data-from="0" data-to="763" data-suffix=""></h2>
+                    <p class="h5 mb-0">People Out Near You</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="oval-divider--bottom oval-divider--5"></div>
+    </section>
   </div>
 </template>
 
@@ -48,6 +129,8 @@ export default {
     {
       this.jwt = localStorage.jwt;
     }
+  },
+  mounted: function() {
     mapboxgl.accessToken =
       "pk.eyJ1IjoiZGVwYWRpbGxhIiwiYSI6ImNqdWQ5bnVwODAzMzc0ZG54Nmczc2dtbnkifQ.KBH1DI_79-4JNlAOhb3xZg";
     var map = new mapboxgl.Map({

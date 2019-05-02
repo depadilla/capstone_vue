@@ -1,18 +1,21 @@
 <template>
     <div class="show">
-        <h2>{{ location.name }}</h2>
-        <p>{{ location.description }}</p>
-        <p>{{ location.address }}</p>
-        <p>{{ location.headcount }}</p>
+        <div class="container">
+            <h2>{{ location.name }}</h2>
+            <p>{{ location.description }}</p>
+            <p>{{ location.address }}</p>
+            <p>Headcount: {{ location.headcount }} people</p>
 
-        <div v-for="special in location.specials">
-            <p>{{ special.name }} - ${{ special.price }}.00</p>
+            <div class="container" v-for="special in location.specials">
+                <li>{{ special.name }} - ${{ special.price }}.00</li>
+            </div>
+
+            <div><button v-on:click="checkIn()">Check In</button></div>
+            <div><button v-on:click="checkOut()">Check Out</button></div>
+
+            <div><router-link to="/Home">Back to all locations</router-link></div>
+            <div id="map"></div>
         </div>
-
-        <div><button v-on:click="checkIn()">Check In</button></div>
-        <div><button v-on:click="checkOut()">Check Out</button></div>
-
-        <div><router-link to="/Home">Back to all locations</router-link></div>
     </div>
 </template>
 
@@ -27,23 +30,75 @@ export default {
     data: function() {
         return {
             location: {},
-            message: "Already checked in!"
+            A1: -87.6371347,
+            A2: 41.892514,
+            B1: -87.6315971,
+            B2: 41.8894298,
+            C1: -87.6360374,
+            C2: 41.8920448,
+            D1: -87.6375766,
+            D2: 41.8967205,
+            E1: -87.6337935,
+            E2: 41.8960176,
+            message: "Already checked in!",
+            x: 0.0,
+            y: 0.0
         };
     },
-    created: function() {
+    mounted: function() {
         axios.get("/api/locations/" + this.$route.params.id).then(response => {
             this.location = response.data;
-        });
-    },
-    mounted: function() {
-        mapboxgl.accessToken =
-            "pk.eyJ1IjoiZGVwYWRpbGxhIiwiYSI6ImNqdWQ5bnVwODAzMzc0ZG54Nmczc2dtbnkifQ.KBH1DI_79-4JNlAOhb3xZg";
-        var map = new mapboxgl.Map({
-            container: "map", // container id
-            style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
-            center: [-82.6348295, 41.8921364], // starting position [lng, lat]
-            zoom: 13, // starting zoom
-            interactive: false
+            switch (this.location.name) {
+                case "Municipal Bar":
+                    this.x = this.A1;
+                    this.y = this.A2;
+                    break;
+                case "Mercadito":
+                    this.x = this.B1;
+                    this.y = this.B2;
+                    break;
+                case "O'Leary's Public House":
+                    this.x = this.C1;
+                    this.y = this.C2;
+                    break;
+                case "Farmhouse Chicago":
+                    this.x = this.D1;
+                    this.y = this.D2;
+                    break;
+                case "Seoul Taco":
+                    this.x = this.E1;
+                    this.y = this.E2;
+                    break;
+                default:
+                    this.x = 0;
+                    this.y = 0;
+                    break;
+            }
+            mapboxgl.accessToken =
+                "pk.eyJ1IjoiZGVwYWRpbGxhIiwiYSI6ImNqdWQ5bnVwODAzMzc0ZG54Nmczc2dtbnkifQ.KBH1DI_79-4JNlAOhb3xZg";
+            var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+            mapboxClient.geocoding
+                .forwardGeocode({
+                    query: this.location.address,
+                    autocomplete: true,
+                    limit: 1
+                })
+                .send()
+                .then(function(response) {
+                    if (response && response.body && response.body.features && response.body.features.length) {
+                        var feature = response.body.features[0];
+
+                        var map = new mapboxgl.Map({
+                            container: "map",
+                            style: "mapbox://styles/mapbox/streets-v11",
+                            center: feature.center,
+                            zoom: 14,
+                            interactive: true
+                        });
+                        new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+                        var marker = new mapboxgl.Marker().setLngLat([-87.6348295, 41.8921364]).addTo(map);
+                    }
+                });
         });
     },
     methods: {
