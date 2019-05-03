@@ -1320,7 +1320,7 @@ html.sticky-header-active #header .header-body {
 }
 
 html.sticky-header-active #header .header-body.header-body-bottom-border {
-	border-bottom: 1px solid rgba(234, 234, 234, 0.5) !important;
+	border-bottom: 0px solid rgba(234, 234, 234, 0.5) !important;
 }
 
 html.sticky-header-active #header.header-effect-shrink .header-body {

@@ -6,7 +6,7 @@
       <p>Capacity: {{ location.capacity }}</p>
       <router-link v-bind:to="`/locations/${location.id}`">More Info</router-link>
     </div>
-
+    <br />
     <section class="section pb-0 mr-8 ml-8" data-parallax="assets/img/street.jpg" data-overlay="4">
       <div class="container">
         <div class="row align-items-center">
@@ -102,8 +102,10 @@ body {
   margin-right: auto;
   top: 0;
   bottom: 0;
-  width: 50%;
+  width: 90%;
   height: 400px;
+  margin-bottom: 2em;
+  border-style: double;
 }
 </style>
 
@@ -119,10 +121,6 @@ export default {
     };
   },
   created: function() {
-    // axios.get("https://api.mapbox.com/geocoding/v5/mapbox.places/bar.json").then(response => {
-    //   this.location = response.data;
-    //   document.location.reload();
-    // });
     axios.get("/api/locations").then(response => {
       this.locations = response.data;
     });
@@ -149,6 +147,16 @@ export default {
       })
     );
     var marker = new mapboxgl.Marker().setLngLat([-87.6348295, 41.8921364]).addTo(map);
+    !(function(d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://weatherwidget.io/js/widget.min.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }
+    })(document, "script", "weatherwidget-io-js");
   },
   methods: {}
 };
