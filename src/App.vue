@@ -40,27 +40,27 @@
                 <nav class="collapse">
                   <ul class="nav nav-pills" id="mainNav">
                     <li class="dropdown dropdown-mega">
-                      <a class="dropdown-item dropdown-toggle active" v-if="!jwt" href="/Welcome">
+                      <a class="btn btn-xl btn-round btn-light w-180 floated font-weight-bold" v-if="!jwt" href="/Welcome">
                         Welcome
                       </a>
                     </li>
                     <li class="dropdown">
-                      <a class="dropdown-item dropdown-toggle" v-if="jwt" href="/Home">
+                      <a class="btn btn-xl btn-round btn-light w-180 floated font-weight-bold" v-if="jwt" href="/Home">
                         Home
                       </a>
                     </li>
                     <li class="dropdown">
-                      <a class="dropdown-item dropdown-toggle" v-if="!jwt" href="/LogIn">
+                      <a class="btn btn-xl btn-round btn-light w-180 floated font-weight-bold" v-if="!jwt" href="/LogIn">
                         Log In
                       </a>
                     </li>
                     <li class="dropdown">
-                      <a class="dropdown-item dropdown-toggle" v-if="!jwt" href="/SignUp">
+                      <a class="btn btn-xl btn-round btn-light w-180 floated font-weight-bold" v-if="!jwt" href="/SignUp">
                         Sign Up
                       </a>
                     </li>
                     <li class="dropdown">
-                      <router-link to="#" v-on:click.native="logOut()" v-if="jwt" > Log Out </router-link>
+                      <router-link class="btn btn-xl btn-round btn-light w-180 floated font-weight-bold" to="#" v-on:click.native="logOut()" v-if="jwt" > Log Out </router-link>
                     </li>
                   </ul>
                 </nav>
@@ -82,14 +82,21 @@
 
 <router-view />
 <!-- FOOTER -->
-<footer class="bg-dark p-0">
+
+<footer class="bg-light p-0">
   <div class="container pt-10 pb-0">
     <div class="row">
       <div class="col-sm-5">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <p>
-          <span class="m-link-light">Wind</span> New places to explore! <br>
+          <span class="m-link-dark"></span> Where will the Wind take you tonight?
         </p>
-        <div class="social social-light mt-3">
+        <div class="social social-dark mt-3">
           <a class="social-facebook m-0" href="#"><i class="fab fa-facebook-f"></i></a>
           <a class="social-twitter m-0" href="#"><i class="fab fa-twitter"></i></a>
           <a class="social-linkedin m-0" href="#"><i class="fab fa-linkedin"></i></a>
@@ -97,7 +104,7 @@
         </div>
       </div>
       <div class="col-sm-2">
-        <h3 class="h6 mb-3 text-white">
+        <h3 class="h6 mb-3 text-black">
           Quick Links
         </h3>
         <ul class="list-unstyled mb-0">
@@ -109,31 +116,29 @@
         </ul>
       </div>
       <div class="col-sm-2">
-        <h3 class="h6 mb-3 text-white">
+        <h3 class="h6 mb-3 text-black">
           Service
         </h3>
         <ul class="list-unstyled mb-0">
           <li><a class="m-list--link" href="#">App Design</a></li>
           <li><a class="m-list--link" href="#">App Development</a></li>
           <li><a class="m-list--link" href="#">Web Design</a> </li>
-          <li><a class="m-list--link" href="#">Illustration</a> </li>
-          <li><a class="m-list--link" href="#">Graphic Design </a> </li>
         </ul>
       </div>
       <div class="col-sm-3">
-        <h3 class="h6 mb-3 text-white">
+        <h3 class="h6 mb-3 text-black">
           Contact Us
         </h3>
 
-        <address class="fs-14 text-white-50">
-          <strong class="text-white">Twitter, Inc.</strong><br>
-          1355 Market St, Suite 900<br>
-          San Francisco, CA 94103<br>
+        <address class="fs-14 text-black-50">
+          <strong class="text-black">Wind, Inc.</strong><br>
+          215 W Ohio St Suite 300<br>
+           Chicago, IL 60654<br>
           <abbr title="Phone">P:</abbr> (123) 456-7890
         </address>
         <address class="fs-14">
-          <strong class="text-white">Full Name</strong><br>
-          <a class="m-link" href="mailto:#">first.last@example.com</a>
+          <strong class="text-black">Daniel Padilla</strong><br>
+          <a class="m-link" href="mailto:#">daniel.padilla@wind.com</a>
         </address>
       </div>
     </div>
@@ -144,7 +149,7 @@
 
     <div class="row">
       <div class="col-md-12 text-center">
-        <p><span class="fs-17">©</span> 2019 <span class="m-link-light">Wind</span>. All rights reserved.</p>
+        <p><span class="fs-17">©</span> 2019 <span class="m-link-dark">Wind</span>. All rights reserved.</p>
       </div>
     </div>
   </div>
@@ -163,12 +168,13 @@ body {
   font-size: 60px;
   padding-left: 3em;
 }
-/*#bar {
-  background-image: url(/assets/img/wind.jpeg);
-  background-size: cover;
-  background-repeat: repeat;
-  background-position: center center;
-}*/
+p {
+  font-family: "Exo 2", sans-serif;
+}
+.palabra {
+  font-size: 27px !important;
+  font-family: "Exo 2", sans-serif;
+}
 </style>
 
 <script>
@@ -180,14 +186,6 @@ export default {
       jwt: null,
       location: " "
     };
-  },
-  mounted: function() {
-    $(".nav .nav-link").on("click", function() {
-      $(".nav")
-        .find(".active")
-        .removeClass("active");
-      $(this).addClass("active");
-    });
   },
   created: function() {
     this.jwt = localStorage.jwt;

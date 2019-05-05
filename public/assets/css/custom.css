@@ -13,3 +13,8 @@
 .header-card-title {
     margin: 0;
 }
+
+.bg-light {
+  background-image: url("/assets/img/sectionbg2.png");
+  background-position: fill;
+}

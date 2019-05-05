@@ -1,17 +1,38 @@
 <template>
-  <div class="welcome">
+  <div class="welcome container">
+    <br />
+    <br />
     <h1>{{ welcome_message }}</h1>
     <h3>Here's a little something about the site:</h3>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
       magna aliqua. Augue mauris augue neque gravida in fermentum et.
     </p>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 
 <style>
 img {
   width: 250px;
+}
+h1 {
+  font-family: "Bree Serif", serif;
+  text-align: center;
+  font-size: 70px;
+}
+p {
+  font-family: "Exo 2", sans-serif;
 }
 </style>
 

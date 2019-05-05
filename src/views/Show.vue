@@ -7,20 +7,18 @@
         type="text/css"
       />
 
+      <!-- <i class="fa fa-play"></i> -->
+
       <div class="container">
         <div class="row justify-content-center align-items-center shadow-8 p-8 border">
           <div class="col-md-5">
             <p class="small o-7 font-weight-bold">Headcount: {{ location.headcount }} people</p>
-            <h4>{{ location.name }}</h4>
-            <br />
+            <h2 class="container">{{ location.name }}</h2>
             <h6>
               {{ location.description }}
               <br />
               {{ location.address }}
             </h6>
-            <!-- <div class="container" v-for="special in location.specials">
-              <li>{{ special.name }} - ${{ special.price }}.00</li>
-            </div> -->
             <div class="media-body" v-for="special in location.specials">
               <ul class="list-unstyled fs-15">
                 <li>
@@ -30,17 +28,17 @@
               </ul>
             </div>
             <div>
-              <a class="btn btn-xl btn-round btn-light w-180 floated" href="#" v-on:click="checkIn()">
+              <a class="btn btn-xl btn-round btn-light w-180 floated font-weight-bold" href="#" v-on:click="checkIn()">
                 Check In!
               </a>
-              <a class="btn btn-xl btn-round btn-light w-180 floated" href="#" v-on:click="checkOut()">
+              <a class="btn btn-xl btn-round btn-light w-180 floated font-weight-bold" href="#" v-on:click="checkOut()">
                 Check Out!
               </a>
             </div>
           </div>
           <div class="col-md-7">
             <div id="map" class="h-300 rounded"></div>
-            <a class="btn btn-primary btn-pill transition-hover pr-6 pl-6" href="/Home" target="_self">
+            <a class="btn btn-primary btn-pill transition-hover pr-6 pl-6 fon" href="/Home" target="_self">
               Back to all locations
             </a>
           </div>
@@ -56,9 +54,15 @@
   width: 105%;
   height: 100%;
 }
+h6 {
+  font-family: "Exo 2", sans-serif;
+}
 .floated {
   float: left;
   margin-right: 5px;
+}
+h2 {
+  font-size: 32px;
 }
 </style>
 
